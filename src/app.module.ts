@@ -9,6 +9,7 @@ import { join } from 'path';
 import { APP_FILTER } from '@nestjs/core';
 import { AllExceptionsFilter } from './common/filters/general-exceptions.filter';
 import { AuthModule } from './auth/auth.module';
+import { AppointmentsModule } from './modules/appointments/appointments.module';
 
 
 
@@ -26,6 +27,7 @@ import { AuthModule } from './auth/auth.module';
     synchronize: true,}),
   UsersModule,
   AuthModule,
+  AppointmentsModule,
 
 
   
