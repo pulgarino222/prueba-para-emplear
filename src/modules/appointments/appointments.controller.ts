@@ -1,34 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { AppointmentsService } from './appointments.service';
+import { Controller, Post, Body ,Get,Query,Patch,Param} from '@nestjs/common';
+import { AppointmentService } from '../appointments/appointments.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
-import { UpdateAppointmentDto } from './dto/update-appointment.dto';
+import { Appointment } from '../appointments/entities/appointment.entity';
+import { ApiQuery } from '@nestjs/swagger'
 
 @Controller('appointments')
-export class AppointmentsController {
-  constructor(private readonly appointmentsService: AppointmentsService) {}
+export class AppointmentController {
+  constructor(private readonly appointmentService: AppointmentService) {}
 
   @Post()
-  create(@Body() createAppointmentDto: CreateAppointmentDto) {
-    return this.appointmentsService.create(createAppointmentDto);
+  async create(@Body() createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
+    return this.appointmentService.createAppointment(createAppointmentDto);
   }
 
-  @Get()
-  findAll() {
-    return this.appointmentsService.findAll();
+  @Get('filter')
+  @ApiQuery({ name: 'date', required: false, description: 'Fecha en formato ISO' })
+  @ApiQuery({ name: 'specialty', required: false, description: 'Especialidad médica' })
+  @ApiQuery({ name: 'reason', required: false, description: 'Motivo de la cita' })
+  async filterAppointments(
+    @Query('date') date?: string, // Fecha en formato ISO
+    @Query('specialty') specialty?: string, // Especialidad
+    @Query('reason') reason?: string, // Motivo
+  ): Promise<Appointment[]> {
+    return this.appointmentService.filterAppointments({ date, specialty, reason });
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.appointmentsService.findOne(+id);
+
+  @Patch(':id/description')
+  async updateDescription(
+    @Param('id') id: string, // Parámetro 'id' en la URL
+    @Body('description') description: string, // Descripción nueva desde el cuerpo de la solicitud
+  ): Promise<Appointment> {
+    return this.appointmentService.updateDescription(id, description);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAppointmentDto: UpdateAppointmentDto) {
-    return this.appointmentsService.update(+id, updateAppointmentDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.appointmentsService.remove(+id);
-  }
 }
