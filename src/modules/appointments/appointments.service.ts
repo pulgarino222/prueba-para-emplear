@@ -142,6 +142,48 @@ export class AppointmentService {
     
     return this.appointmentRepository.save(appointment);
   }
+
+
+
+  async getDoctorAvailability(doctorId: string, date: string): Promise<{ availableHours: string[] }> {
+    
+    const workStartHour = 9;
+    const workEndHour = 17;
+  
+    
+    const parsedDate = new Date(date);
+    const startOfDay = new Date(parsedDate.setUTCHours(0, 0, 0, 0));
+    const endOfDay = new Date(parsedDate.setUTCHours(23, 59, 59, 999));
+  
+    
+    const doctor = await this.userRepository.findOne({ where: { id: doctorId } });
+    if (!doctor) {
+      throw new NotFoundException('Doctor not found');
+    }
+  
+   
+    const appointments = await this.appointmentRepository.find({
+      where: {
+        doctor: { id: doctorId },
+        date: Between(startOfDay, endOfDay),
+      },
+      select: ['time'], 
+    });
+  
+    
+    const occupiedHours = new Set(appointments.map(app => app.time));
+  
+    
+    const availableHours: string[] = [];
+    for (let hour = workStartHour; hour < workEndHour; hour++) {
+      const hourString = `${hour}:00`;
+      if (!occupiedHours.has(hourString)) {
+        availableHours.push(hourString);
+      }
+    }
+  
+    return { availableHours };
+  }
 }
 
 

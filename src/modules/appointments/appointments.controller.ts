@@ -8,6 +8,15 @@ import { ApiQuery } from '@nestjs/swagger'
 export class AppointmentController {
   constructor(private readonly appointmentService: AppointmentService) {}
 
+
+  @Get('availability/:doctorId')
+  async getDoctorAvailability(
+    @Param('doctorId') doctorId: string,
+    @Query('date') date: string,
+  ) {
+    return this.appointmentService.getDoctorAvailability(doctorId, date);
+  }
+
   @Post()
   async create(@Body() createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
     return this.appointmentService.createAppointment(createAppointmentDto);
@@ -18,9 +27,9 @@ export class AppointmentController {
   @ApiQuery({ name: 'specialty', required: false, description: 'Especialidad médica' })
   @ApiQuery({ name: 'reason', required: false, description: 'Motivo de la cita' })
   async filterAppointments(
-    @Query('date') date?: string, // Fecha en formato ISO
-    @Query('specialty') specialty?: string, // Especialidad
-    @Query('reason') reason?: string, // Motivo
+    @Query('date') date?: string, 
+    @Query('specialty') specialty?: string, 
+    @Query('reason') reason?: string, 
   ): Promise<Appointment[]> {
     return this.appointmentService.filterAppointments({ date, specialty, reason });
   }
@@ -28,10 +37,12 @@ export class AppointmentController {
 
   @Patch(':id/description')
   async updateDescription(
-    @Param('id') id: string, // Parámetro 'id' en la URL
-    @Body('description') description: string, // Descripción nueva desde el cuerpo de la solicitud
+    @Param('id') id: string, 
+    @Body('description') description: string, 
   ): Promise<Appointment> {
     return this.appointmentService.updateDescription(id, description);
   }
+
+  
 
 }
