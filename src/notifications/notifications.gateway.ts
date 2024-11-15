@@ -12,11 +12,11 @@ export class NotificationsGateway implements OnGatewayConnection, OnGatewayDisco
   server: Server;
 
   handleConnection(client: Socket) {
-    console.log(`Cliente conectado: ${client.id}`);
+    console.log(`Client connected: ${client.id}`);
   }
 
   handleDisconnect(client: Socket) {
-    console.log(`Cliente desconectado: ${client.id}`);
+    console.log(`Client discconected: ${client.id}`);
   }
 
 
@@ -35,8 +35,8 @@ export class NotificationsGateway implements OnGatewayConnection, OnGatewayDisco
 
   @SubscribeMessage('createUser')
   handleCreateUser(@MessageBody() data: any, @ConnectedSocket() client: Socket) {
-    console.log('Usuario creado:', data);
+    console.log('user created:', data);
 
-    this.notifyAll('userCreated', { message: 'Nuevo usuario creado con éxito', user: data });
+    this.notifyAll('userCreated', { message: 'new user succesfull', user: data });
   }
 }

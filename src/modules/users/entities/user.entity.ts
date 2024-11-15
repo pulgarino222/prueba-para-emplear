@@ -1,6 +1,7 @@
 import { IsEmail, IsNumber, IsString } from "class-validator";
-import { Column, PrimaryGeneratedColumn, Entity, CreateDateColumn, ManyToMany, JoinTable } from "typeorm";
+import { Column, PrimaryGeneratedColumn, Entity, CreateDateColumn, ManyToMany, JoinTable,OneToMany } from "typeorm";
 import { Role } from '../../../auth/entities/roles.entity';
+import { Appointment } from "../../appointments/entities/appointment.entity";
 
 @Entity()
 export class User {
@@ -35,4 +36,7 @@ export class User {
     @ManyToMany(() => Role, role => role.users)
     @JoinTable() 
     roles: Role[];
+
+    @OneToMany(() => Appointment, appointment => appointment.doctor)
+    appointments: Appointment[];
 }
