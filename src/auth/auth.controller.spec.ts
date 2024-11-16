@@ -4,8 +4,10 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from '../modules/users/dto/create-user.dto';
 import { User } from 'src/modules/users/entities/user.entity';
 import { login } from './dto/login-auth.dto';
+import { GoogleAuthGuard } from './guards/jwt-google.guard';
+import { LoginCountInterceptor } from './interceptor/interceptor-count-login.interceptor';
 
-
+// Mock de AuthService
 const mockAuthService = {
   register: jest.fn(),
   generateJwtToken: jest.fn(),
@@ -63,7 +65,9 @@ describe('AuthController', () => {
         phone: 1234567890,
         createdAt: new Date(),
         updatedAt: new Date(),
-        roles: [],
+        roles: [], 
+        availability: true, 
+        appointments: [], 
       };
 
       const accessToken = 'jwt.token';

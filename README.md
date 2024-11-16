@@ -1,99 +1,78 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Assestmen Project - Backend Overview
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Welcome to the **Assestmen** backend project! This application is built using **NestJS**, a modern framework for building scalable and maintainable server-side applications. The project leverages cutting-edge technologies such as **JWT (JSON Web Tokens)** for secure authentication, **Passport** for OAuth integration, **TypeORM** for database interactions, and **Swagger** for auto-generating API documentation. The main goal of this project is to provide a secure, efficient, and easily maintainable architecture.
 
-## Project setup
+---
 
-```bash
-$ npm install
-```
+## Technologies Used
 
-## Compile and run the project
+### **NestJS**
 
-```bash
-# development
-$ npm run start
+- **[NestJS](https://nestjs.com/)**: A powerful framework for building server-side applications with Node.js, leveraging **TypeScript** and modern architectural patterns. It provides a modular structure that enables scalable and robust code organization.
+- **@nestjs/core**: The core of the NestJS framework, used to create modules, controllers, and providers.
+- **@nestjs/common**: A set of common utilities, decorators, and helpers to build applications effectively in NestJS.
+- **@nestjs/platform-express**: An adapter that allows NestJS to run on **Express.js**, simplifying the development of web applications.
 
-# watch mode
-$ npm run start:dev
+### **Database - MySQL & TypeORM**
 
-# production mode
-$ npm run start:prod
-```
+- **[MySQL](https://www.mysql.com/)**: A widely-used relational database management system, perfect for handling structured data and managing relationships between entities.
+- **[TypeORM](https://typeorm.io/)**: An ORM (Object-Relational Mapping) tool for TypeScript and JavaScript, making database interactions seamless and simple by defining entities and relationships.
+- **mysql2**: A MySQL client for Node.js, used by TypeORM to connect to MySQL databases.
 
-## Run tests
+### **Authentication**
 
-```bash
-# unit tests
-$ npm run test
+- **[Passport](http://www.passportjs.org/)**: A flexible and modular authentication middleware for Node.js. This project utilizes **Google OAuth** and **JWT** strategies to handle user authentication and authorization.
+  - **passport-google-oauth**: Integrates Google OAuth for user authentication.
+  - **passport-jwt**: Implements JWT authentication to securely manage user sessions.
+- **@nestjs/jwt**: This module integrates JWT functionality into NestJS, providing tools for creating and validating tokens.
+- **bcrypt**: Used to encrypt user passwords, ensuring they are never stored in plain text in the database.
 
-# e2e tests
-$ npm run test:e2e
+### **Swagger**
 
-# test coverage
-$ npm run test:cov
-```
+- **[Swagger](https://swagger.io/)**: A suite of tools designed for designing, documenting, and consuming RESTful APIs. This project uses **@nestjs/swagger** to automatically generate API documentation based on routes and controllers.
 
-## Deployment
+### **RxJS**
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- **[RxJS](https://rxjs.dev/)**: A library for reactive programming that simplifies the handling of asynchronous operations and events in Angular and Node.js applications. It is used here to efficiently manage asynchronous data flows and events.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### **Testing**
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+- **[Jest](https://jestjs.io/)**: A widely-used JavaScript testing framework for unit and integration tests. Jest allows efficient test creation using mocks and spies.
+  - **ts-jest**: A Jest preset that allows working with TypeScript, enabling tests to be written directly in TypeScript without pre-compiling to JavaScript.
+- **supertest**: A library to perform HTTP tests on Express and NestJS applications, allowing you to send HTTP requests and make assertions on the responses.
+- **@nestjs/testing**: A set of testing utilities specifically designed for NestJS, allowing the creation of testing modules and accessing controllers and services for unit testing.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### **Code Linting and Formatting**
 
-## Resources
+- **ESLint**: A tool that ensures the source code adheres to defined style guides and best practices. Configured with the `@typescript-eslint/eslint-plugin` to analyze TypeScript code.
+- **Prettier**: An automatic code formatter that ensures a consistent style throughout the codebase.
 
-Check out a few resources that may come in handy when working with NestJS:
+### **Other Dependencies**
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+- **class-transformer**: A tool used to transform objects between different representations, such as converting classes to JSON and vice versa.
+- **class-validator**: Provides decorators for class-based validation. This project uses it to validate API route data, such as `CreateUserDto`.
+- **reflect-metadata**: Required to enable reflection capabilities in TypeScript, primarily used by TypeORM and NestJS.
+- **socket.io**: A library that enables real-time communication between the client and the server through WebSockets. It is used in this project to facilitate bi-directional communication.
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Project Scripts
 
-## Stay in touch
+- **build**: Compiles TypeScript code into JavaScript for production use.
+- **format**: Uses Prettier to automatically format the entire source code.
+- **start**: Starts the server in normal mode.
+- **start:dev**: Starts the server in development mode, with hot-reloading (watch mode).
+- **start:debug**: Starts the server in debug mode.
+- **start:prod**: Starts the server in production mode, using compiled code.
+- **lint**: Runs ESLint to analyze the code and fix any potential issues or style violations.
+- **test**: Runs unit tests for the project using Jest.
+- **test:watch**: Runs unit tests in "watch" mode, automatically rerunning tests as code changes.
+- **test:cov**: Runs tests and generates a code coverage report.
+- **test:debug**: Runs tests in debug mode.
+- **test:e2e**: Executes end-to-end tests.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).

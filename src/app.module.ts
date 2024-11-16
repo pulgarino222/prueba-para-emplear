@@ -11,13 +11,18 @@ import { AllExceptionsFilter } from './common/filters/general-exceptions.filter'
 import { AuthModule } from './auth/auth.module';
 import { AppointmentsModule } from './modules/appointments/appointments.module';
 import { PatientsModule } from './modules/patients/patients.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, '..', 'public'), 
+    }),
   ConfigModuleCustom,
-  TypeOrmModule.forRoot({ 
+  TypeOrmModule.forRoot({
     type:'mysql',
     host: process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT),

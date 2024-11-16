@@ -7,7 +7,7 @@ import {
   } from '@nestjs/common';
   import { Response } from 'express';
   
-  @Catch() // Captura todas las excepciones
+  @Catch() 
   export class AllExceptionsFilter implements ExceptionFilter {
     catch(exception: unknown, host: ArgumentsHost) {
         
@@ -15,14 +15,14 @@ import {
       const response = ctx.getResponse<Response>();
       const request = ctx.getRequest<Request>();
   
-      // Inicializa estado y mensaje
+     
       const status = this.getStatus(exception);
       const message = this.getMessage(exception);
   
-      // Log del error
+      
       this.logError(exception, status, request.url);
   
-      // Respuesta estructurada
+     
       response.status(status).json({
         statusCode: status,
         timestamp: new Date().toISOString(),
@@ -44,7 +44,7 @@ import {
         if (typeof response === 'string') {
           return response;
         } 
-        // Aserción de tipo para acceder a 'message'
+        
         return (response as { message?: string }).message || 'Error no específico';
       } else if (exception instanceof Error) {
         return exception.message || 'Error no específico';

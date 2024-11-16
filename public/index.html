@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido al Hospital</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="hospital-logo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEENLwyDdDx6A/company-logo_200_200/company-logo_200_200/0/1707255460963/riwi_io_logo?e=2147483647&v=beta&t=LfHShQCXUWYK9SFyBEybxHN-IAQjNSZvapVDEJZT09Q" alt="Hospital Logo">
+        </div>
+
+        <h1>Bienvenido al Hospital</h1>
+        <p>Accede a tu cuenta para gestionar tu salud.</p>
+
+        <div class="login-form">
+            <input type="email" id="email" placeholder="Correo Electrónico" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="button" onclick="signIn()">Iniciar Sesión</button>
+            <div class="google-btn" onclick="googleLogin()">
+                <img src="data:image/png;base64,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" alt="Sign in with Google">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        function googleLogin() {
+            window.location.href = "http://localhost:3001/auth/google";
+        }
+
+        function signIn() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            
+        }
+    </script>
+</body>
+</html>
+

@@ -22,7 +22,7 @@ export class CreateUserDto {
 
     @IsNotEmpty()
     @IsNumber()
-    // @IsDigits(11, { message: 'phone must be a 10 digits number' })
+
     phone: number;
 
     

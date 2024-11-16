@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Citas Médicas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        .form-group input, .form-group select, .form-group button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .form-group button {
+            background-color: #005f7f;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #004d66;
+        }
+
+        .appointments-list {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .appointments-list p {
+            font-size: 1rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Citas Médicas</h1>
+
+       
+        <div class="form-group">
+            <h3>Ver Disponibilidad del Doctor</h3>
+            <input type="text" id="doctorId" placeholder="ID del Doctor">
+            <input type="date" id="appointmentDate">
+            <button onclick="getDoctorAvailability()">Ver Disponibilidad</button>
+        </div>
+
+
+        <div class="form-group">
+            <h3>Crear Cita Médica</h3>
+            <input type="text" id="specialty" placeholder="Especialidad Médica">
+            <input type="text" id="reason" placeholder="Motivo de la Cita">
+            <textarea id="description" placeholder="Descripción de la Cita"></textarea>
+            <button onclick="createAppointment()">Crear Cita</button>
+        </div>
+
+   
+        <div class="form-group">
+            <h3>Filtrar Citas</h3>
+            <input type="date" id="filterDate">
+            <input type="text" id="filterSpecialty" placeholder="Especialidad Médica">
+            <input type="text" id="filterReason" placeholder="Motivo de la Cita">
+            <button onclick="filterAppointments()">Filtrar Citas</button>
+        </div>
+
+  
+        <div class="appointments-list" id="appointmentsList">
+           
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3001/appointments';
+
+       
+        const getDoctorAvailability = async () => {
+            const doctorId = document.getElementById("doctorId").value;
+            const date = document.getElementById("appointmentDate").value;
+
+            try {
+                const response = await fetch(`${API_URL}/availability/${doctorId}?date=${date}`);
+                const data = await response.json();
+                alert(`Disponibilidad del Doctor: ${JSON.stringify(data)}`);
+            } catch (error) {
+                console.error('Error al obtener disponibilidad:', error);
+            }
+        };
+
+        
+        const createAppointment = async () => {
+            const specialty = document.getElementById("specialty").value;
+            const reason = document.getElementById("reason").value;
+            const description = document.getElementById("description").value;
+
+            const appointmentData = {
+                specialty,
+                reason,
+                description
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(appointmentData)
+                });
+                const data = await response.json();
+                alert('Cita creada con éxito');
+            } catch (error) {
+                console.error('Error al crear la cita:', error);
+            }
+        };
+
+      
+        const filterAppointments = async () => {
+            const date = document.getElementById("filterDate").value;
+            const specialty = document.getElementById("filterSpecialty").value;
+            const reason = document.getElementById("filterReason").value;
+
+            const query = new URLSearchParams({ date, specialty, reason }).toString();
+
+            try {
+                const response = await fetch(`${API_URL}/filter?${query}`);
+                const data = await response.json();
+                displayAppointments(data);
+            } catch (error) {
+                console.error('Error al filtrar citas:', error);
+            }
+        };
+
+    
+        const displayAppointments = (appointments) => {
+            const appointmentsList = document.getElementById("appointmentsList");
+            appointmentsList.innerHTML = '';
+
+            appointments.forEach(appointment => {
+                const appointmentElement = document.createElement('p');
+                appointmentElement.textContent = `Cita: ${appointment.specialty} - ${appointment.reason} - ${appointment.description}`;
+                appointmentsList.appendChild(appointmentElement);
+            });
+        };
+    </script>
+</body>
+</html>
