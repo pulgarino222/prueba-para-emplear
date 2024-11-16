@@ -2,7 +2,7 @@
 
 ## Overview
 
-This API allows managing appointments for doctors and patients. It includes endpoints to create appointments, filter them, check doctor availability, and update appointment descriptions. The API is secured with JWT authentication and requires the user to be authenticated to access most endpoints.
+This API allows managing appointments for doctors and patients. It includes endpoints to create appointments, filter them, check doctor availability, and update appointment descriptions. The API is secured with JWT authentication and requires the user to be authenticated to access most endpoints remember do the npm i and npm run start:dev.
 
 ---
 
