@@ -4,7 +4,14 @@ export const swaggerConfig = new DocumentBuilder()
   .setTitle('Products API')
   .setDescription('The products API description')
   .setVersion('1.0')
-  .addBearerAuth()
+  .addBearerAuth(
+    {
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+    },
+    'access-token', // Nombre del esquema de seguridad
+  )
   .build();
 
 export const swaggerCustomOptions: SwaggerCustomOptions = {

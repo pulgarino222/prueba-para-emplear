@@ -4,6 +4,7 @@ import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { Appointment } from '../appointments/entities/appointment.entity';
 import { ApiQuery } from '@nestjs/swagger'
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
+import { RolesGuard } from 'src/auth/guards/jwt-roles.guard';
 
 @Controller('appointments')
 export class AppointmentController {
@@ -18,7 +19,7 @@ export class AppointmentController {
     return this.appointmentService.getDoctorAvailability(doctorId, date);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard,RolesGuard)
   @Post()
   async create(@Body() createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
     return this.appointmentService.createAppointment(createAppointmentDto);
