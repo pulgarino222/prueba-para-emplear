@@ -357,3 +357,19 @@ This API provides endpoints for user authentication (sign up, login, Google auth
 - **Google OAuth Flow**: The Google authentication flow is handled through the `googleAuth` and `googleAuthCallback` endpoints. The callback endpoint issues the JWT token after successful Google login.
 - **Password Encryption**: Passwords are securely stored and compared using bcrypt hashing.
 
+tests:
+
+
+{
+  "doctorId": "3e7c4e7e-b0a9-4256-94fd-a7e3a9e89146",
+  "patientId": "0353da11-b7c8-4391-8f9b-f57327f17a04",
+  "date": "2024-11-20T10:30:00.000Z",
+  "time": "10:30 AM",
+  "description": "Consulta de seguimiento",
+  "specialty": "Cardiología",
+  "reason": "Dolor en el pecho"
+}
+
+login:{"email":"pulgarinhernandezjuanfelipe@gmail.com",
+"password":"123"
+}

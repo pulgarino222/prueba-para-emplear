@@ -19,7 +19,7 @@ export class AppointmentController {
     return this.appointmentService.getDoctorAvailability(doctorId, date);
   }
 
-  @UseGuards(JwtAuthGuard,RolesGuard)
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
     return this.appointmentService.createAppointment(createAppointmentDto);
