@@ -46,6 +46,4 @@ export class AppointmentController {
     return this.appointmentService.updateDescription(id, description);
   }
 
-  
-
 }
